@@ -1,16 +1,13 @@
-const  http = require('http');
-//const server = http.createServer((req, res) => {
-//   resizeBy.end('welcome');
-//})
+const EventEmitter = require('events');
 
-//using Event Emitter API
-const server = http.createServer();
+const customEmitter = new EventEmitter();
 
-// emmits request event 
-// subscribe to it / listen for it / rspsond to it
-
-server.on('request', (req, res) => {
-    res.end('Weclcome')
+customEmitter.on('response', (name, id) => {
+  console.log(`data recieved user ${name} with id:${id}` );
+})
+customEmitter.on('response', () => {
+  console.log(`some other logic here `);
 })
 
-server.listen(5000)
+customEmitter.emit('response','john',25)
+
